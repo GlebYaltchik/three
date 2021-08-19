@@ -32,6 +32,7 @@ type MaterialParameters struct {
 	Transparent bool       `js:"transparent"`
 	Opacity     float64    `js:"opacity"`
 	Map         *js.Object `js:"map"`
+	LineWidth   float64    `js:"linewidth"`
 }
 
 func NewMaterialParameters() *MaterialParameters {

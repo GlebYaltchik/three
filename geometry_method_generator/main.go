@@ -1,7 +1,7 @@
-package main
-
 // The following directive is necessary to make the package coherent:
 // +build ignore
+
+package main
 
 import (
 	"flag"
