@@ -8,7 +8,8 @@ type PerspectiveCameraPosition struct {
 
 type PerspectiveCamera struct {
 	*js.Object
-
+	// Use Set method to set up vector.
+	Up               Vector3 `js:"up"`
 	Position         Vector3 `js:"position"`
 	MatrixAutoUpdate bool    `js:"matrixAutoUpdate"`
 	Aspect           float64 `js:"aspect"`
@@ -44,6 +45,13 @@ func (c PerspectiveCamera) GetFilmHeight() float64 {
 
 func (c PerspectiveCamera) SetViewOffset(fullWidth, fullHeight, x, y, width, height float64) {
 	c.Object.Call("setViewOffset", fullWidth, fullHeight, x, y, width, height)
+}
+
+// SetUp sets the up direction for the camera.
+//
+// It is the equivalent to c.Up.Set(v.X, v.Y, v.Z)
+func (c PerspectiveCamera) SetUp(v Vector3) {
+	c.Up.Set(v.X, v.Y, v.Z)
 }
 
 func (c PerspectiveCamera) ClearViewOffset() {
