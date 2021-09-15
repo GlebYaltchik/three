@@ -22,10 +22,15 @@ func NewBufferGeometry() *BufferGeometry {
 	}
 }
 
-// AddVertice adds new vertice to the geometry, specified by its coordinates.
-func (bg *BufferGeometry) AddVertice(x, y, z float64) {
+// AddVertex adds new vertex to the geometry, specified by its coordinates.
+func (bg *BufferGeometry) AddVertex(x, y, z float64) {
 	vec := NewVector3(x, y, z)
 	bg.Vertices = append(bg.Vertices, vec)
+}
+
+// AddVertices adds new vertices to the geometry.
+func (bg *BufferGeometry) AddVertices(v ...Vector3) {
+	bg.Vertices = append(bg.Vertices, v...)
 }
 
 // AddFace adds new Face3 (triangle) to the geometry, specified by its vertice indicies.

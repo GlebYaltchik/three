@@ -19,10 +19,17 @@ func NewBasicGeometry(params BasicGeometryParams) BasicGeometry {
 	}
 }
 
-// AddVertice adds new vertice to the geometry, specified by its coordinates.
-func (bg *BasicGeometry) AddVertice(x, y, z float64) {
+// AddVertex adds new vertex to the geometry, specified by its coordinates.
+func (bg *BasicGeometry) AddVertex(x, y, z float64) {
 	vec := NewVector3(x, y, z)
 	bg.Get("vertices").Call("push", vec)
+}
+
+// AddVertices adds new vertices to the geometry.
+func (bg *BasicGeometry) AddVertices(v ...Vector3) {
+	for i := range v {
+		bg.Get("vertices").Call("push", v[i])
+	}
 }
 
 // AddFace adds new Face3 (triangle) to the geometry, specified by its vertice indicies.
