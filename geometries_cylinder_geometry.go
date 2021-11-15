@@ -46,6 +46,12 @@ func NewCylinderGeometry(params *CylinderGeometryParameters) CylinderGeometry {
 	if params == nil {
 		params = &CylinderGeometryParameters{}
 	}
+	// Make sure all are defined to prevent unclear code. This could be changed though...
+	if params.Height == 0 || params.RadiusTop == 0 || params.RadiusBottom == 0 {
+		params.Height = 1
+		params.RadiusTop = 1
+		params.RadiusBottom = 1
+	}
 	// Probably don't want no cylinder.
 	if params.ThetaLength == 0 {
 		params.ThetaLength = 2 * math.Pi
