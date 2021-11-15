@@ -1,5 +1,7 @@
 package three
 
+//go:generate go run object3d_method_generator/main.go -typeName ArrowHelper -typeSlug arrow_helper
+
 import "github.com/gopherjs/gopherjs/js"
 
 type ArrowHelper struct {
@@ -24,7 +26,7 @@ type ArrowHeadParameters struct {
 	HeadWidth  float64
 }
 
-func NewArrowHelper(params *ArrowHelperParameters) ArrowHelper {
+func NewArrowHelper(params *ArrowHelperParameters) *ArrowHelper {
 	if params == nil {
 		params = &ArrowHelperParameters{}
 	}
@@ -40,7 +42,8 @@ func NewArrowHelper(params *ArrowHelperParameters) ArrowHelper {
 	}
 
 	if params.Color == nil {
-		params.Color = NewColor("ffff00")
+
+		params.Color = NewColorHex(0xffff00)
 	}
 	if params.HeadLength == 0 {
 		params.HeadLength = 0.2 * params.Length
@@ -49,7 +52,7 @@ func NewArrowHelper(params *ArrowHelperParameters) ArrowHelper {
 		params.HeadWidth = 0.2 * params.HeadLength
 	}
 
-	return ArrowHelper{
+	return &ArrowHelper{
 		Object: three.Get("ArrowHelper").New(
 			params.Dir,
 			params.Origin,

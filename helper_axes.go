@@ -1,5 +1,7 @@
 package three
 
+//go:generate go run object3d_method_generator/main.go -typeName AxesHelper -typeSlug axes_helper
+
 import "github.com/gopherjs/gopherjs/js"
 
 type AxesHelper struct {
@@ -17,16 +19,16 @@ type AxesHelper struct {
 	Visible          bool            `js:"visible"`
 }
 
-func NewAxesHelper(size float64) AxesHelper {
+func NewAxesHelper(size float64) *AxesHelper {
 	if size == 0 {
 		size = 1
 	}
-	return AxesHelper{
+	return &AxesHelper{
 		Object: three.Get("AxesHelper").New(size),
 	}
 }
 
-func (g AxesHelper) SetColors(xaxis, yaxis, zaxis Color) AxesHelper {
+func (g AxesHelper) SetColors(xaxis, yaxis, zaxis *Color) AxesHelper {
 	g.Object.Call("setColor", xaxis, yaxis, zaxis)
 	return g
 }

@@ -1,6 +1,6 @@
 package three
 
-//go:generate go run geometry_method_generator/main.go -geometryType PolarGridHelper -geometrySlug polargrid
+//go:generate go run object3d_method_generator/main.go -typeName PolarGridHelper -typeSlug polargrid_helper
 
 import "github.com/gopherjs/gopherjs/js"
 
@@ -35,7 +35,7 @@ type PolarGridHelperParameters struct {
 	Color2 *Color
 }
 
-func NewPolarGridHelper(params *PolarGridHelperParameters) PolarGridHelper {
+func NewPolarGridHelper(params *PolarGridHelperParameters) *PolarGridHelper {
 	if params == nil {
 		params = &PolarGridHelperParameters{}
 	}
@@ -57,7 +57,7 @@ func NewPolarGridHelper(params *PolarGridHelperParameters) PolarGridHelper {
 	if params.Color2 == nil {
 		params.Color2 = NewColorHex(0x888888)
 	}
-	return PolarGridHelper{
+	return &PolarGridHelper{
 		Object: three.Get("PolarGridHelper").New(
 			params.Radius,
 			params.Radials,

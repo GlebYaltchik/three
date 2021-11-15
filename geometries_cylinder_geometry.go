@@ -63,18 +63,20 @@ func NewCylinderGeometry(params *CylinderGeometryParameters) CylinderGeometry {
 		params.RadialSegments = 8
 	}
 	if params.HeightSegments == 0 {
-		params.RadialSegments = 1
+		params.HeightSegments = 1
 	}
+	obj := three.Get("CylinderGeometry").New(
+		params.RadiusTop,
+		params.RadiusBottom,
+		params.Height,
+		params.RadialSegments,
+		params.HeightSegments,
+		params.OpenEnded,
+		params.ThetaStart,
+		params.ThetaLength,
+	)
+	// js.Global.Get("console").Call("log", obj.Interface(), params)
 	return CylinderGeometry{
-		Object: three.Get("CylinderGeometry").New(
-			params.RadiusTop,
-			params.RadiusBottom,
-			params.Height,
-			params.RadialSegments,
-			params.HeightSegments,
-			params.OpenEnded,
-			params.ThetaStart,
-			params.ThetaLength,
-		),
+		Object: obj,
 	}
 }
