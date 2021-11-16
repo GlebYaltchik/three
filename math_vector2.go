@@ -5,8 +5,8 @@ import "github.com/gopherjs/gopherjs/js"
 // Vector2 - represents a Vector2.
 type Vector2 struct {
 	*js.Object
-	X float64 `js:"X"`
-	Y float64 `js:"Y"`
+	X float64 `js:"x"`
+	Y float64 `js:"y"`
 }
 
 func NewVector2(x, y float64) *Vector2 {
