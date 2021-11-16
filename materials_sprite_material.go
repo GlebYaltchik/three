@@ -10,7 +10,7 @@ type SpriteMaterial struct {
 	*js.Object
 }
 
-func NewSpriteMaterial(texture *js.Object) *SpriteMaterial {
+func NewSpriteMaterial(texture *Texture) *SpriteMaterial {
 	params := NewMaterialParameters()
 	params.Map = texture
 	return &SpriteMaterial{

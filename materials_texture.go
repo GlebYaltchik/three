@@ -12,7 +12,7 @@ type Texture struct {
 	Id    int    `js:"id"`
 	UUID  string `js:"uuid"`
 	Name  string `js:"name"`
-	Image Image  `js:"image"`
+	Image *Image `js:"image"`
 	// Array of user-specified mipmaps (optional).
 	Mipmaps        *js.Object    `js:"mipmaps"`
 	WrapS          WrappingMode  `js:"wrapS"`
@@ -45,7 +45,7 @@ type Texture struct {
 }
 
 type TextureParameters struct {
-	Image Image
+	Image *Image
 	// How the image is applied to the object. An object type of THREE.UVMapping is the default, where the U,V coordinates are used to apply the map.
 	Mapping MappingMode
 	// This defines how the texture is wrapped horizontally and corresponds to U in UV mapping.
@@ -64,35 +64,21 @@ type TextureParameters struct {
 	Encoding   TextureEncoding
 }
 
-func NewTexture(params TextureParameters) Texture {
+func NewTexture(params TextureParameters) *Texture {
 	if params.Anisotropy == 0 {
 		params.Anisotropy = 1
 	}
-	if params.WrapS == 0 {
-		params.WrapS = ClampToEdgeWrapping
-	}
-	if params.WrapT == 0 {
-		params.WrapT = ClampToEdgeWrapping
-	}
-	if params.MagFilter == 0 {
-		params.MagFilter = LinearFilter
-	}
-	if params.MinFilter == 0 {
-		params.MinFilter = LinearMipmapLinearFilter
-	}
-	if params.Mapping == 0 {
-		params.Mapping = UVMapping
-	}
-	if params.Type == 0 {
-		params.Type = UnsignedByteType
-	}
-	if params.Format == 0 {
-		params.Format = RGBAFormat
-	}
-	if params.Encoding == 0 {
-		params.Encoding = LinearEncoding
-	}
-	return Texture{
+	// Set Default values if parameters are invalid
+	params.WrapS.clampDefault()
+	params.WrapT.clampDefault()
+	params.MagFilter.clampDefault(true)
+	params.MinFilter.clampDefault(false)
+	params.Mapping.clampDefault()
+	params.Type.clampDefault()
+	params.Format.clampDefault()
+	params.Encoding.clampDefault()
+
+	return &Texture{
 		Object: three.Get("Texture").New(
 			params.Image,
 			params.Mapping,
@@ -109,25 +95,25 @@ func NewTexture(params TextureParameters) Texture {
 }
 
 // Update the texture's uv-transform .matrix from the texture properties .offset, .repeat, .rotation, and .center.
-func (t Texture) UpdateMatrix() {
+func (t *Texture) UpdateMatrix() {
 	t.Call("updateMatrix")
 }
 
-func (t Texture) Clone() Texture {
-	return Texture{
+func (t *Texture) Clone() *Texture {
+	return &Texture{
 		Object: t.Call("clone"),
 	}
 }
 
-func (t Texture) ToJSON() interface{} {
+func (t *Texture) ToJSON() interface{} {
 	return t.Object.Call("toJSON")
 }
 
-func (t Texture) Dispose() {
+func (t *Texture) Dispose() {
 	t.Object.Call("dispose")
 }
 
-func (t Texture) TransformUV(uv Vector2) Vector2 {
+func (t *Texture) TransformUV(uv Vector2) Vector2 {
 	return Vector2{
 		Object: t.Object.Call("transformUV", uv),
 	}

@@ -25,12 +25,26 @@ const (
 	CubeUVRefractionMapping MappingMode = 307
 )
 
+func (m *MappingMode) setDefault() { *m = UVMapping }
+func (m *MappingMode) clampDefault() {
+	if *m < UVMapping || *m > CubeUVRefractionMapping {
+		m.setDefault()
+	}
+}
+
 // These define the texture's wrapS and wrapT properties, which define horizontal and vertical texture wrapping.
 const (
 	RepeatWrapping WrappingMode = iota + 1000
 	ClampToEdgeWrapping
 	MirroredRepeatWrapping
 )
+
+func (w *WrappingMode) setDefault() { *w = ClampToEdgeWrapping }
+func (w *WrappingMode) clampDefault() {
+	if *w < RepeatWrapping || *w > MirroredRepeatWrapping {
+		w.setDefault()
+	}
+}
 
 // For use with a texture's minFilter (and magfilter)	property, these define the texture minifying function that is used whenever the pixel being textured maps to an area greater than one texture element (texel).
 const (
@@ -41,6 +55,20 @@ const (
 	LinearMipmapNearestFilter
 	LinearMipmapLinearFilter
 )
+
+func (filter *MinMagFilter) setDefault(isMagnification bool) {
+	if isMagnification {
+		*filter = LinearFilter
+	} else {
+		// Is Minification Filter
+		*filter = LinearMipmapLinearFilter
+	}
+}
+func (filter *MinMagFilter) clampDefault(isMagnification bool) {
+	if *filter < NearestFilter || *filter > LinearMipmapLinearFilter {
+		filter.setDefault(isMagnification)
+	}
+}
 
 // For use with a texture's format	property, these define how elements of a 2d texture, or texels, are read by shaders.
 const (
@@ -60,6 +88,13 @@ const (
 	RGBAIntegerFormat    TextureFormat = 1033
 )
 
+func (f *TextureFormat) setDefault() { *f = RGBAFormat }
+func (f *TextureFormat) clampDefault() {
+	if *f < AlphaFormat || *f > RGBAIntegerFormat {
+		f.setDefault()
+	}
+}
+
 // For use with a texture's type property, which must correspond to the correct format. See below for details.
 const (
 	UnsignedByteType      TextureType = 1009
@@ -76,6 +111,13 @@ const (
 	UnsignedInt248Type    TextureType = 1020
 )
 
+func (t *TextureType) setDefault() { *t = UnsignedByteType }
+func (t *TextureType) clampDefault() {
+	if *t < UnsignedByteType || *t > UnsignedInt248Type {
+		t.setDefault()
+	}
+}
+
 // LinearEncoding is the default. Values other than this are only valid for a material's map, envMap and emissiveMap.
 const (
 	LinearEncoding    TextureEncoding = 3000
@@ -89,3 +131,10 @@ const (
 	BasicDepthPacking TextureEncoding = 3200
 	RGBADepthPacking  TextureEncoding = 3201
 )
+
+func (t *TextureEncoding) setDefault() { *t = LinearEncoding }
+func (t *TextureEncoding) clampDefault() {
+	if *t < LinearEncoding || *t > RGBADepthPacking {
+		t.setDefault()
+	}
+}

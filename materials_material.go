@@ -26,13 +26,19 @@ const (
 type MaterialParameters struct {
 	*js.Object
 
-	Color       *Color     `js:"color"`
-	Shading     Shading    `js:"shading"`
-	Side        Side       `js:"side"`
-	Transparent bool       `js:"transparent"`
-	Opacity     float64    `js:"opacity"`
-	Map         *js.Object `js:"map"`
-	LineWidth   float64    `js:"linewidth"`
+	Color       *Color   `js:"color"`
+	Shading     Shading  `js:"shading"`
+	Side        Side     `js:"side"`
+	Transparent bool     `js:"transparent"`
+	Opacity     float64  `js:"opacity"`
+	Map         *Texture `js:"map"`
+	LineWidth   float64  `js:"linewidth"`
+
+	BumpMap   *Texture `js:"bumpMap"`
+	BumpScale float64  `js:"bumpScale"`
+
+	SpecularMap *Texture `js:"specularMap"`
+	Specular    *Color   `js:"specular"`
 }
 
 func NewMaterialParameters() *MaterialParameters {
