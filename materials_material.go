@@ -34,9 +34,10 @@ type MaterialParameters struct {
 	Map         *Texture `js:"map"`
 	LineWidth   float64  `js:"linewidth"`
 
-	BumpMap   *Texture `js:"bumpMap"`
-	BumpScale float64  `js:"bumpScale"`
+	// Phong Materials
 
+	BumpMap     *Texture `js:"bumpMap"`
+	BumpScale   float64  `js:"bumpScale"`
 	SpecularMap *Texture `js:"specularMap"`
 	Specular    *Color   `js:"specular"`
 }

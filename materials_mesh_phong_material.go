@@ -8,6 +8,11 @@ import (
 
 type MeshPhongMaterial struct {
 	*js.Object
+
+	BumpMap     *Texture `js:"bumpMap"`
+	BumpScale   float64  `js:"bumpScale"`
+	SpecularMap *Texture `js:"specularMap"`
+	Specular    *Color   `js:"specular"`
 }
 
 func NewMeshPhongMaterial(params *MaterialParameters) *MeshPhongMaterial {
