@@ -1,5 +1,7 @@
 package three
 
+//go:generate go run camera_method_generator/main.go -typeName PerspectiveCamera -typeSlug perspective_camera
+
 import "github.com/gopherjs/gopherjs/js"
 
 type PerspectiveCameraPosition struct {
@@ -15,12 +17,11 @@ type PerspectiveCamera struct {
 	Aspect           float64 `js:"aspect"`
 }
 
+// Assert PerspectiveCamera implements Camera.
+var _ Camera = PerspectiveCamera{}
+
 func NewPerspectiveCamera(fov, aspect, near, far float64) PerspectiveCamera {
 	return PerspectiveCamera{Object: three.Get("PerspectiveCamera").New(fov, aspect, near, far)}
-}
-
-func (c PerspectiveCamera) Copy() PerspectiveCamera {
-	return PerspectiveCamera{Object: c.Object.Call("copy")}
 }
 
 func (c PerspectiveCamera) SetFocalLength(focalLength float64) {
