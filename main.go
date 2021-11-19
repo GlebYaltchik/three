@@ -19,3 +19,16 @@ func init() {
 		}
 	}
 }
+
+// getModule gets a module or property added to THREE or globalThis.
+func getModule(namespace string) *js.Object {
+	mod := three.Get(namespace)
+	if mod != js.Undefined {
+		return mod
+	}
+	mod = js.Global.Get(namespace)
+	if mod != js.Undefined {
+		return mod
+	}
+	panic("three:failed to get " + namespace + " namespace from THREE and global namespace")
+}

@@ -26,15 +26,20 @@ type TrackballControls struct {
 	// Whether or not damping is disabled. Default is false.
 	StaticMoving bool    `js:"staticMoving"`
 	ZoomSpeed    float64 `js:"zoomSpeed"`
+	// This array holds keycodes for controlling interactions.
+	// When the first defined key is pressed, all mouse interactions (left, middle, right) performs orbiting.
+	// When the second defined key is pressed, all mouse interactions (left, middle, right) performs zooming.
+	// When the third defined key is pressed, all mouse interactions (left, middle, right) performs panning.
+	// Default is KeyA, KeyS, KeyD which represents A, S, D.
+	Keys []string `js:"keys"`
 }
 
 // NewTrackballControls instances a TrackballControls. Requires TrackballControls to be
-// added at a global level. See example https://github.com/mrdoob/three.js/blob/master/examples/jsm/controls/TrackballControls.js.
+// added at a global level or on THREE. See https://github.com/turban/webgl-earth for a
+// way of doing this easily using Eberhard Graether's http://egraether.com/ version.
 func NewTrackballControls(camera Camera, domElement *js.Object) TrackballControls {
-	trackball := js.Global.Get("TrackballControls")
-	if trackball == js.Undefined {
-		panic("TrackballControls undefined at global level. Please add it somehow, god help you.")
-	}
+	const namespace = "TrackballControls"
+	trackball := getModule(namespace)
 	if domElement == nil || domElement == js.Undefined {
 		panic("domElement must be defined")
 	}
