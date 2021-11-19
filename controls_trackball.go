@@ -32,6 +32,12 @@ type TrackballControls struct {
 	// When the third defined key is pressed, all mouse interactions (left, middle, right) performs panning.
 	// Default is KeyA, KeyS, KeyD which represents A, S, D.
 	Keys []string `js:"keys"`
+	// WARNING: Not part of documentation. Use to set where zoom-in focuses on.
+	Target Vector3 `js:"target"`
+	// WARNING: Not part of documentation.
+	Target0 Vector3 `js:"target0"`
+	// WARNING: Not part of documentation. Current position of camera.
+	Position Vector3 `js:"position"`
 }
 
 // NewTrackballControls instances a TrackballControls. Requires TrackballControls to be
