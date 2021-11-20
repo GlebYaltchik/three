@@ -7,8 +7,10 @@ package three
 
 import "github.com/gopherjs/gopherjs/js"
 
-func (g BasicGeometry) ApplyMatrix(matrix *Matrix4) {
-	g.Object.Call("applyMatrix", matrix)
+var _ Geometry = BasicGeometry{}
+
+func (g BasicGeometry) ApplyMatrix4(matrix *Matrix4) {
+	g.Object.Call("applyMatrix4", matrix)
 }
 
 func (g BasicGeometry) RotateX() {

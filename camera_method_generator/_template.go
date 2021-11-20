@@ -7,6 +7,8 @@ package three
 
 import "github.com/gopherjs/gopherjs/js"
 
+var _ Camera = {{ .Type }}{}
+
 // Return a new camera with the same properties as this one.
 func (obj {{ .Type }}) Clone() {{ .Type }} {
 	return {{ .Type }}{

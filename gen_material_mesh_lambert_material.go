@@ -10,6 +10,8 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
+var _ Material = MeshLambertMaterial{}
+
 func (m MeshLambertMaterial) OnBeforeCompile() {
 	m.Call("onBeforeCompile")
 }

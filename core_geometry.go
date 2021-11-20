@@ -3,7 +3,7 @@ package three
 import "github.com/gopherjs/gopherjs/js"
 
 type Geometry interface {
-	ApplyMatrix(matrix *Matrix4)
+	ApplyMatrix4(matrix *Matrix4)
 	RotateX()
 	RotateY()
 	RotateZ()

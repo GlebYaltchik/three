@@ -40,8 +40,8 @@ func (bg *BufferGeometry) AddFace(a, b, c int) {
 }
 
 // AddAttribute adds a new attribute like 'position' to the BufferGeometry.
-func (bg *BufferGeometry) AddAttribute(name string, attr *BufferAttribute) {
-	bg.Call("addAttribute", name, attr)
+func (bg *BufferGeometry) SetAttribute(name string, attr *BufferAttribute) {
+	bg.Call("setAttribute", name, attr)
 }
 
 // GetAttribute retruns BufferGeometry's attribute by name (should be added first by

@@ -10,6 +10,8 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
+var _ Material = SpriteMaterial{}
+
 func (m SpriteMaterial) OnBeforeCompile() {
 	m.Call("onBeforeCompile")
 }

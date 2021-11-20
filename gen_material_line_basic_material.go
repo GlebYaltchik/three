@@ -10,6 +10,8 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
+var _ Material = LineBasicMaterial{}
+
 func (m LineBasicMaterial) OnBeforeCompile() {
 	m.Call("onBeforeCompile")
 }

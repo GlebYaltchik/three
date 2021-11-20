@@ -7,8 +7,11 @@ package three
 
 import "github.com/gopherjs/gopherjs/js"
 
-func (obj *Sprite) ApplyMatrix(matrix *Matrix4) {
-	obj.Call("applyMatrix", matrix)
+// Compile-time check that this type implements Object3D interface.
+var _ Object3D = &Sprite{}
+
+func (obj *Sprite) ApplyMatrix4(matrix *Matrix4) {
+	obj.Call("applyMatrix4", matrix)
 }
 
 func (obj *Sprite) Add(m Object3D) {

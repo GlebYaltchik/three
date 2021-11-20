@@ -3,7 +3,7 @@ package three
 import "github.com/gopherjs/gopherjs/js"
 
 type Object3D interface {
-	ApplyMatrix(matrix *Matrix4)
+	ApplyMatrix4(matrix *Matrix4)
 	Add(Object3D)
 	Remove(*js.Object)
 	ToJSON() interface{}

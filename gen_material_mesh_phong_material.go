@@ -10,6 +10,8 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
+var _ Material = MeshPhongMaterial{}
+
 func (m MeshPhongMaterial) OnBeforeCompile() {
 	m.Call("onBeforeCompile")
 }

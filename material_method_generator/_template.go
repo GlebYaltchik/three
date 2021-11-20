@@ -10,6 +10,8 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
+var _ Material = {{ .Type }}{}
+
 func (m {{ .Type }}) OnBeforeCompile() {
 	m.Call("onBeforeCompile")
 }

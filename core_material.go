@@ -4,6 +4,17 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
+type Material interface {
+	OnBeforeCompile()
+	SetValues(values MaterialParameters)
+	ToJSON(meta interface{}) interface{}
+	Clone()
+	Copy(source Object3D)
+	Dispose()
+
+	getInternalObject() *js.Object
+}
+
 // Side defines which side of faces will be rendered - front, back or both. Default is FrontSide.
 type Side float64
 
@@ -40,21 +51,29 @@ type MaterialParameters struct {
 	BumpScale   float64  `js:"bumpScale"`
 	SpecularMap *Texture `js:"specularMap"`
 	Specular    *Color   `js:"specular"`
+
+	// Physical Materials
+
+	Clearcoat             float64  `js:"clearcoat"`
+	ClearcoatMap          *Texture `js:"clearcoatMap"`
+	ClearcoatNormalMap    *Texture `js:"clearcoatNormalMap"`
+	ClearcoatNormalScale  Vector2  `js:"clearcoatNormalScale"`
+	ClearcoatRoughness    float64  `js:"clearcoatRoughness"`
+	ClearcoatRoughnessMap *Texture `js:"clearcoatRoughnessMap"`
+	// Index of refraction
+	IOR               float64  `js:"ior"`
+	Reflectivity      float64  `js:"reflectivity"`
+	Sheen             float64  `js:"sheen"`
+	SheenRoughness    float64  `js:"sheenRoughness"`
+	SheenRoughnessMap *Texture `js:"sheenRoughnessMap"`
+	SheenColor        *Color   `js:"sheenColor"`
+	SheenColorMap     *Texture `js:"sheenColorMap"`
+	Transmission      float64  `js:"transmission"`
+	TransmissionMap   *Texture `js:"transmissionMap"`
 }
 
 func NewMaterialParameters() *MaterialParameters {
 	return &MaterialParameters{
 		Object: js.Global.Get("Object").New(),
 	}
-}
-
-type Material interface {
-	OnBeforeCompile()
-	SetValues(values MaterialParameters)
-	ToJSON(meta interface{}) interface{}
-	Clone()
-	Copy(source Object3D)
-	Dispose()
-
-	getInternalObject() *js.Object
 }
