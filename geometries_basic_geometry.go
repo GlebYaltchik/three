@@ -5,6 +5,8 @@ package three
 import "github.com/gopherjs/gopherjs/js"
 
 // BasicGeometry is the basic primitive geometry class. It's a counterpart of three.js' core/Geometry object.
+//
+// DEPRECATED: Not in documentation at https://threejs.org/docs/index.html.
 type BasicGeometry struct {
 	*js.Object
 }

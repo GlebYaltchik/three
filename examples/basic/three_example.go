@@ -64,11 +64,12 @@ func main() {
 }
 
 func animate() {
-	js.Global.Call("requestAnimationFrame", animate)
-
 	pos := mesh.Object.Get("rotation")
 	pos.Set("x", pos.Get("x").Float()+float64(0.01))
 	pos.Set("y", pos.Get("y").Float()+float64(0.01))
 
 	renderer.Render(scene, camera)
+
+	// Best practice (soypat's opinion) to request frame after work is done.
+	js.Global.Call("requestAnimationFrame", animate)
 }

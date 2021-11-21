@@ -1,56 +1,34 @@
 package three
 
-//go:generate go run geometry_method_generator/main.go -geometryType SphereGeometry -geometrySlug sphere_geometry
+//go:generate go run geometry_method_generator/main.go -geometryType CircleGeometry -geometrySlug circle_geometry
 
-import (
-	"math"
+import "github.com/gopherjs/gopherjs/js"
 
-	"github.com/gopherjs/gopherjs/js"
-)
-
-type SphereGeometry struct {
+type CircleGeometry struct {
 	*js.Object
 
 	Radius      float64 `js:"radius"`
-	Segments    float64 `js:"segments"`
+	Segments    int     `js:"segments"`
 	ThetaStart  float64 `js:"thetaStart"`
 	ThetaLength float64 `js:"thetaLength"`
 }
 
-type SphereGeometryParameters struct {
-	Radius         float64
-	WidthSegments  float64
-	HeightSegments float64
-	ThetaStart     float64
-	ThetaLength    float64
-	PhiStart       float64
-	PhiLength      float64
+type CircleGeometryParameters struct {
+	Radius      float64
+	Segments    int
+	ThetaStart  float64
+	ThetaLength float64
 }
 
-// NewSphereGeometry creates a new BoxGeometry.
-func NewSphereGeometry(params SphereGeometryParameters) SphereGeometry {
-	if params.ThetaLength == 0 {
-		params.ThetaLength = math.Pi
+// NewBoxGeometry creates a new BoxGeometry.
+func NewCircleGeometry(params CircleGeometryParameters) CircleGeometry {
+	if params.Segments < 3 {
+		params.Segments = 8
 	}
-	if params.PhiLength == 0 {
-		params.PhiLength = 2 * math.Pi
-	}
-	if params.WidthSegments == 0 {
-		params.WidthSegments = 8
-	}
-	if params.HeightSegments == 0 {
-		params.HeightSegments = 6
-	}
-	if params.Radius == 0 {
-		params.Radius = 1
-	}
-	return SphereGeometry{
-		Object: three.Get("SphereGeometry").New(
+	return CircleGeometry{
+		Object: three.Get("CircleGeometry").New(
 			params.Radius,
-			params.WidthSegments,
-			params.HeightSegments,
-			params.PhiStart,
-			params.PhiLength,
+			params.Segments,
 			params.ThetaStart,
 			params.ThetaLength,
 		),
