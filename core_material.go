@@ -45,6 +45,9 @@ type MaterialParameters struct {
 	Map         *Texture `js:"map"`
 	LineWidth   float64  `js:"linewidth"`
 
+	// Points
+	Size float64 `js:"size"`
+
 	// Phong Materials
 
 	BumpMap     *Texture `js:"bumpMap"`
