@@ -38,7 +38,8 @@ type MaterialParameters struct {
 	*js.Object
 
 	Color       *Color   `js:"color"`
-	Shading     Shading  `js:"shading"`
+	Shading     Shading  `js:"shading"` // THREE.MeshLambertMaterial: .shading has been removed. Use the boolean .flatShading instead.
+	FlatShading bool     `js:"flatShading"`
 	Side        Side     `js:"side"`
 	Transparent bool     `js:"transparent"`
 	Opacity     float64  `js:"opacity"`

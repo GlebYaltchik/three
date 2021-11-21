@@ -13,9 +13,9 @@ type BoxGeometry struct {
 	Width          float64 `js:"width"`
 	Height         float64 `js:"height"`
 	Depth          float64 `js:"depth"`
-	WidthSegments  float64 `js:"widthSegments"`
-	HeightSegments float64 `js:"heightSegments"`
-	DepthSegments  float64 `js:"depthSegments"`
+	WidthSegments  int     `js:"widthSegments"`
+	HeightSegments int     `js:"heightSegments"`
+	DepthSegments  int     `js:"depthSegments"`
 }
 
 // BoxGeometryParameters .
@@ -23,13 +23,22 @@ type BoxGeometryParameters struct {
 	Width          float64
 	Height         float64
 	Depth          float64
-	WidthSegments  float64
-	HeightSegments float64
-	DepthSegments  float64
+	WidthSegments  int
+	HeightSegments int
+	DepthSegments  int
 }
 
 // NewBoxGeometry creates a new BoxGeometry.
 func NewBoxGeometry(params *BoxGeometryParameters) BoxGeometry {
+	if params.WidthSegments == 0 {
+		params.WidthSegments = 1
+	}
+	if params.HeightSegments == 0 {
+		params.HeightSegments = 1
+	}
+	if params.DepthSegments == 0 {
+		params.DepthSegments = 1
+	}
 	return BoxGeometry{
 		Object: three.Get("BoxGeometry").New(
 			params.Width,

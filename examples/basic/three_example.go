@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/divan/three"
 	"github.com/gopherjs/gopherjs/js"
+	"github.com/soypat/three"
 )
 
 var (
@@ -51,7 +51,7 @@ func main() {
 
 	materialParams := three.NewMaterialParameters()
 	materialParams.Color = three.NewColor("blue")
-	materialParams.Shading = three.SmoothShading
+	// materialParams.FlatShading = false
 	materialParams.Side = three.FrontSide
 	//material := three.NewMeshBasicMaterial(materialParams)
 	material := three.NewMeshLambertMaterial(materialParams)
