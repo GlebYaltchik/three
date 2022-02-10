@@ -1,4 +1,5 @@
 // The following directive is necessary to make the package coherent:
+//go:build ignore
 // +build ignore
 
 package main
@@ -8,7 +9,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/soypat/three/generator"
+	"github.com/soypat/gthree/generator"
 )
 
 //go:embed _template.go

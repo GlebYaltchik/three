@@ -1,4 +1,4 @@
-package three
+package gthree
 
 //go:generate go run camera_method_generator/main.go -typeName PerspectiveCamera -typeSlug perspective_camera
 

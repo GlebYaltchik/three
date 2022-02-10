@@ -1,4 +1,4 @@
-package three
+package gthree
 
 //go:generate go run material_method_generator/main.go -materialName SpriteMaterial -materialSlug sprite_material
 

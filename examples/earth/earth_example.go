@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gopherjs/gopherjs/js"
 
-	"github.com/soypat/three"
+	three "github.com/soypat/gthree"
 )
 
 /*

@@ -2,14 +2,14 @@ package main
 
 import (
 	"github.com/gopherjs/gopherjs/js"
-	"github.com/soypat/three"
+	"github.com/soypat/gthree"
 )
 
 var (
-	scene    *three.Scene
-	camera   three.PerspectiveCamera
-	renderer three.WebGLRenderer
-	mesh     *three.Mesh
+	scene    *gthree.Scene
+	camera   gthree.PerspectiveCamera
+	renderer gthree.WebGLRenderer
+	mesh     *gthree.Mesh
 )
 
 func main() {
@@ -18,25 +18,25 @@ func main() {
 	windowHeight := js.Global.Get("innerHeight").Float()
 	devicePixelRatio := js.Global.Get("devicePixelRatio").Float()
 
-	camera = three.NewPerspectiveCamera(70, windowWidth/windowHeight, 1, 1000)
+	camera = gthree.NewPerspectiveCamera(70, windowWidth/windowHeight, 1, 1000)
 	camera.Position.Set(0, 0, 400)
 
-	scene = three.NewScene()
+	scene = gthree.NewScene()
 
-	light := three.NewDirectionalLight(three.NewColor("white"), 1)
+	light := gthree.NewDirectionalLight(gthree.NewColor("white"), 1)
 	light.Position.Set(256, 256, 256).Normalize()
 	scene.Add(light)
 
-	ambLight := three.NewAmbientLight(three.NewColorHex(0xbbbbbb), 0.4)
+	ambLight := gthree.NewAmbientLight(gthree.NewColorHex(0xbbbbbb), 0.4)
 	scene.Add(ambLight)
 
-	renderer = three.NewWebGLRenderer()
+	renderer = gthree.NewWebGLRenderer()
 	renderer.SetPixelRatio(devicePixelRatio)
 	renderer.SetSize(windowWidth, windowHeight, true)
 	document.Get("body").Call("appendChild", renderer.Get("domElement"))
 
 	// Create cube
-	geometry := three.NewBoxGeometry(&three.BoxGeometryParameters{
+	geometry := gthree.NewBoxGeometry(&gthree.BoxGeometryParameters{
 		Width:  128,
 		Height: 128,
 		Depth:  128,
@@ -49,14 +49,14 @@ func main() {
 	// 	ThetaLength: 2,
 	// })
 
-	materialParams := three.NewMaterialParameters()
-	materialParams.Color = three.NewColor("blue")
+	materialParams := gthree.NewMaterialParameters()
+	materialParams.Color = gthree.NewColor("blue")
 	// materialParams.FlatShading = false
-	materialParams.Side = three.FrontSide
+	materialParams.Side = gthree.FrontSide
 	//material := three.NewMeshBasicMaterial(materialParams)
-	material := three.NewMeshLambertMaterial(materialParams)
+	material := gthree.NewMeshLambertMaterial(materialParams)
 	//material := three.NewMeshPhongMaterial(materialParams)
-	mesh = three.NewMesh(geometry, material)
+	mesh = gthree.NewMesh(geometry, material)
 
 	scene.Add(mesh)
 

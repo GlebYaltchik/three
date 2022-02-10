@@ -1,4 +1,4 @@
-package three
+package gthree
 
 //go:generate go run material_method_generator/main.go -materialName MeshLambertMaterial -materialSlug mesh_lambert_material
 

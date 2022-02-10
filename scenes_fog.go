@@ -1,4 +1,4 @@
-package three
+package gthree
 
 //go:generate go run object3d_method_generator/main.go -typeName Fog -typeSlug fog
 

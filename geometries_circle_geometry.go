@@ -1,4 +1,4 @@
-package three
+package gthree
 
 //go:generate go run geometry_method_generator/main.go -geometryType CircleGeometry -geometrySlug circle_geometry
 

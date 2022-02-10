@@ -1,4 +1,4 @@
-package three
+package gthree
 
 import (
 	"fmt"
