@@ -1,3 +1,6 @@
+## Archived
+This package has been archived. I now favor developing with syscall/js package over gopherjs due to the near complete support it has for `unsafe` and other features of the Go language. If you are interested in a maintained, WASM-ready version please look at https://github.com/soypat/three
+
 # three
 
 GopherJS bindings for [three.js](https://threejs.org/). **Still a WIP.**
